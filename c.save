@@ -1,0 +1,13 @@
+class VictimMenores < ActiveModel::Validator
+    def validate
+      if monster.scare_level > 5 && (victim.birthdate - Date.today) > 18.years
+        errors.add :name, "Parace que tenemos un problema"
+      end
+    end
+end
+
+class Attack < ApplicationRecord
+belongs_to :monster
+belongs_to :victim
+validates_with VictimMenores
+end
